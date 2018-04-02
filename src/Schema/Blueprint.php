@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Support\Fluent;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use NtimYeboah\LaravelDatabaseTrigger\Schema\Event;
+use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTime;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\QueryStatement;
 
 class Blueprint
@@ -158,9 +160,7 @@ class Blueprint
      */
     public function after()
     {
-        $this->time = 'after';
-
-        return $this;
+        $this->time = ActionTime::after();
     }
 
     /**
@@ -170,9 +170,7 @@ class Blueprint
      */
     public function before()
     {
-        $this->time = 'before';
-
-        return $this;
+        $this->time = ActionTime::before();
     }
 
     /**
@@ -182,7 +180,7 @@ class Blueprint
      */
     public function insert()
     {
-        $this->event = 'insert';
+        $this->event = Event::insert();
     }
 
     /**
@@ -192,7 +190,7 @@ class Blueprint
      */
     public function update()
     {        
-        $this->event = 'update';
+        $this->event = Event::update();
     }
 
     /**
@@ -202,7 +200,7 @@ class Blueprint
      */
     public function delete()
     {        
-        $this->event = 'delete';
+        $this->event = Event::delete();
     }
 
     /**
