@@ -161,6 +161,8 @@ class Blueprint
     public function after()
     {
         $this->time = ActionTime::after();
+
+        return $this;
     }
 
     /**
@@ -171,6 +173,8 @@ class Blueprint
     public function before()
     {
         $this->time = ActionTime::before();
+
+        return $this;
     }
 
     /**
