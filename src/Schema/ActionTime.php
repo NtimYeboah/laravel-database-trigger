@@ -9,14 +9,14 @@ class ActionTime
      * 
      * @var string
      */
-    const ACTION_TIME_AFTER = 'after';
+    const ACTION_TIME_AFTER = 'AFTER';
 
     /**
      * Before event
      * 
      * @var string
      */
-    const ACTION_TIME_BEFORE = 'before';
+    const ACTION_TIME_BEFORE = 'BEFORE';
 
     /**
      * Get after event
