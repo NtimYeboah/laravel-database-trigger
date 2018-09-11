@@ -141,6 +141,16 @@ class MySqlBuilder
     }
 
     /**
+     * Drop trigger
+     * 
+     * @return void
+     */
+    public function dropIfExists($trigger)
+    {
+        (new Blueprint($trigger))->dropIfExists();
+    }
+
+    /**
      * Get action time
      * 
      * @return string
