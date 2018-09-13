@@ -2,39 +2,39 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Schema;
 
-class ActionTime
+class ActionTiming
 {   
     /**
-     * After event
+     * After action timing.
      * 
      * @var string
      */
-    const ACTION_TIME_AFTER = 'AFTER';
+    const ACTION_TIMING_AFTER = 'AFTER';
 
     /**
-     * Before event
+     * Before action timing.
      * 
      * @var string
      */
-    const ACTION_TIME_BEFORE = 'BEFORE';
+    const ACTION_TIMING_BEFORE = 'BEFORE';
 
     /**
-     * Get after event
+     * Get after action timing.
      * 
      * @return string
      */
     public static function after()
     {
-        return self::ACTION_TIME_AFTER;
+        return self::ACTION_TIMING_AFTER;
     }
 
     /**
-     * Get before event
+     * Get before action timing.
      * 
      * @return string
      */
     public static function before()
     {
-        return self::ACTION_TIME_BEFORE;
+        return self::ACTION_TIMING_BEFORE;
     }
 }
