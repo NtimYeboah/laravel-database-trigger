@@ -33,89 +33,9 @@ class MySqlGrammar extends Grammar
      * 
      * @return string
      */
-    public function compileCreate(Blueprint $blueprint, Fluent $command, Connection $connection)
+    public function compileCreate(Blueprint $blueprint)
     {
-        if ($this->isInsertTriggerEvent($blueprint)) {
-            return $this->getInsertClause($blueprint, $command, $connection);
-        }
-
-        if ($this->isUpdateTriggerEvent($blueprint)) {
-            return $this->getUpdateClause($blueprint, $command, $connection);
-        }
-
-        return $this->getStatementClause($blueprint, $command, $connection);
-    }
-
-    /**
-     * Determine trigger type.
-     *
-     * @param Blueprint $blueprint
-     * 
-     * @return boolean
-     */
-    private function isInsertTriggerEvent(Blueprint $blueprint)
-    {
-        return $blueprint->tableOperation === 'insert' && ! is_null($blueprint->table);
-    }
-
-    /**
-     * Determine trigger type.
-     * 
-     * @param Blueprint $blueprint
-     * 
-     * @return boolean
-     */
-    private function isUpdateTriggerEvent(Blueprint $blueprint)
-    {
-        return $blueprint->tableOperation === 'update' && ! is_null($blueprint->table);
-    }
-
-    /**
-     * Get trigger clause for statement method.
-     *
-     * @param Blueprint $blueprint
-     * @param Fluent $command
-     * @param Connection $connection
-     * 
-     * @return string
-     */
-    private function getStatementClause(Blueprint $blueprint, Fluent $command, Connection $connection)
-    {
-        return sprintf('delimiter $$ create trigger %s %s %s on %s for each row begin %s; end$$ delimiter ;',
-            $blueprint->trigger, $this->validateActionTime($blueprint), $this->validateEvent($blueprint), 
-            $blueprint->eventTable, $blueprint->clause);
-    }
-
-    /**
-     * Get trigger clause for insert.
-     *
-     * @param Blueprint $blueprint
-     * @param Fluent $command
-     * @param Connection $connection
-     * 
-     * @return string
-     */
-    private function getInsertClause(Blueprint $blueprint, Fluent $command, Connection $connection)
-    {   
-        return sprintf('delimiter $$ create trigger %s %s %s on %s for each row begin %s into %s set %s end$$ delimiter ;', 
-            $blueprint->trigger, $this->validateActionTime($blueprint), $this->validateEvent($blueprint), $blueprint->eventTable, 
-            $blueprint->tableOperation, $blueprint->table, $blueprint->clause);
-    }
-
-    /**
-     * Get trigger clause for update.
-     * 
-     * @param Blueprint $blueprint
-     * @param Fluent $command
-     * @param Connection $connection
-     * 
-     * @return string
-     */
-    private function getUpdateClause(Blueprint $blueprint, Fluent $command, Connection $connection)
-    {
-        return sprintf('delimiter $$ create trigger %s %s %s on %s for each row begin %s %s set %s end$$ delimiter ;', 
-            $blueprint->trigger, $this->validateActionTime($blueprint), $this->validateEvent($blueprint), $blueprint->eventTable, 
-            $blueprint->tableOperation, $blueprint->table, $blueprint->clause);
+        return ("CREATE TRIGGER {$blueprint->trigger} {$this->validateActionTiming($blueprint)} {$this->validateEvent($blueprint)} ON `{$blueprint->eventObjectTable}` FOR EACH ROW BEGIN {$blueprint->statement} END");  
     }
 
     /**
@@ -128,7 +48,7 @@ class MySqlGrammar extends Grammar
     private function validateEvent(Blueprint $blueprint)
     {
         if (! in_array(strtolower($blueprint->event), $this->events)) {
-            throw new InvalidArgumentException("Cannot use {$blueprint->event} as trigger event");
+            throw new InvalidArgumentException("Cannot use {$blueprint->event} as trigger event.");
         }
 
         return $blueprint->event;
@@ -141,13 +61,13 @@ class MySqlGrammar extends Grammar
      * 
      * @return string
      */
-    private function validateActionTime(Blueprint $blueprint)
+    private function validateActionTiming(Blueprint $blueprint)
     {
-        if (! in_array(strtolower($blueprint->time), $this->actionTimes)) {
-            throw new InvalidArgumentException("Cannot use {$blueprint->time} as trigger action time");
+        if (! in_array(strtolower($blueprint->actionTiming), $this->actionTimes)) {
+            throw new InvalidArgumentException("Cannot use {$blueprint->actionTiming} as trigger action timing.");
         }
 
-        return $blueprint->time;
+        return $blueprint->actionTiming;
     }
 
     /**

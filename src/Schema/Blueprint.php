@@ -7,8 +7,7 @@ use Illuminate\Support\Fluent;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Event;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTime;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\QueryStatement;
+use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTiming;
 
 class Blueprint
 {
@@ -24,28 +23,14 @@ class Blueprint
      *
      * @var string
      */
-    public $eventTable;
+    public $eventObjectTable;
 
     /**
-     * Table to perform action.
+     * Event action timing
      *
      * @var string
      */
-    public $table;
-
-    /**
-     * The operation to perform on a table.
-     *
-     * @var string
-     */
-    public $tableOperation;
-
-    /**
-     * Table event time.
-     *
-     * @var string
-     */
-    public $time;
+    public $actionTiming;
 
     /**
      * Table event.
@@ -59,7 +44,7 @@ class Blueprint
      *
      * @var string|array
      */
-    public $clause;
+    public $statement;
 
     /**
      * The commands that should be run for the trigger.
@@ -72,29 +57,18 @@ class Blueprint
      * Create a new schema blueprint.
      *
      * @param string $trigger
-     * @param string $eventTable
-     * @param Closure $callable
      * 
      * @return void
      */
-    public function __construct($trigger, $eventTable = null, Closure $callback = null)
+    public function __construct($trigger)
     {
-        $this->trigger = $trigger;
-        $this->eventTable = $eventTable;
-
-        if (! is_null($callback)) {
-            $callback($queryStatement = $this->getQueryStatement());
-            
-            $this->table = $queryStatement->table;
-            $this->tableOperation = $queryStatement->operation;
-            $this->clause = $queryStatement->clause;
-        }    
+        $this->trigger = $trigger;   
     }
 
     /**
      * Execute the blueprint against the database.
      *
-     * @param  \Illuminate\Database\Connection  $connection
+     * @param  \Illuminate\Database\Connection $connection
      * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
      * 
      * @return void
@@ -102,14 +76,14 @@ class Blueprint
     public function build(Connection $connection, Grammar $grammar)
     {
         foreach ($this->toSql($connection, $grammar) as $statement) {
-            $connection->statement($statement);
+            $connection->unprepared($statement);
         }
     }
 
     /**
      * Get the raw SQL statements for the blueprint.
      *
-     * @param  \Illuminate\Database\Connection  $connection
+     * @param  \Illuminate\Database\Connection $connection
      * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
      * 
      * @return array
@@ -119,10 +93,10 @@ class Blueprint
         $statements = [];
         
         foreach ($this->commands as $command) {
-            $method = 'compile'.ucfirst($command->name);
+            $method = 'compile'. ucfirst($command->name);
             
             if (method_exists($grammar, $method)) {
-                if (! is_null($sql = $grammar->$method($this, $command, $connection))) {
+                if (! is_null($sql = $grammar->$method($this))) {
                     $statements = array_merge($statements, (array) $sql);
                 }
             }
@@ -154,13 +128,41 @@ class Blueprint
     }
 
     /**
+     * Event object table
+     * 
+     * @param string $eventObjectTable
+     * 
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     */
+    public function on($eventObjectTable)
+    {
+        $this->eventObjectTable = $eventObjectTable;
+
+        return $this;
+    }
+
+    /**
+     * Trigger statement
+     * 
+     * @param Closure $callback
+     * 
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     */
+    public function statement(Closure $callback)
+    {
+        $this->statement = $callback();
+
+        return $this;
+    }
+
+    /**
      * Trigger after.
      *
-     * @return NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     public function after()
     {
-        $this->time = ActionTime::after();
+        $this->actionTiming = ActionTiming::after();
 
         return $this;
     }
@@ -168,11 +170,11 @@ class Blueprint
     /**
      * Trigger before.
      *
-     * @return  NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     public function before()
     {
-        $this->time = ActionTime::before();
+        $this->actionTiming = ActionTiming::before();
 
         return $this;
     }
@@ -210,8 +212,8 @@ class Blueprint
     /**
      * Add a new command to the blueprint.
      *
-     * @param  string  $name
-     * @param  array  $parameters
+     * @param string $name
+     * @param array $parameters
      * 
      * @return \Illuminate\Support\Fluent
      */
@@ -225,8 +227,8 @@ class Blueprint
     /**
      * Create a new Fluent command.
      *
-     * @param  string  $name
-     * @param  array  $parameters
+     * @param string $name
+     * @param array $parameters
      * 
      * @return \Illuminate\Support\Fluent
      */
@@ -243,15 +245,5 @@ class Blueprint
     public function getCommands()
     {
         return $this->commands;
-    }
-
-    /**
-     * Get query statement.
-     *
-     * @return \NtimYeboah\LaravelDatabaseTriggers\Schema\QueryStatement
-     */
-    public function getQueryStatement()
-    {
-        return new QueryStatement;
     }
 }

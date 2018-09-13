@@ -15,67 +15,25 @@ class MySqlGrammarTest extends TestCase
         m::close();
     }
 
-    public function testCreateTriggerToRunInsertStatement()
+    public function testCanCreateTrigger()
     {
-        $trigger = 'before_employees_update';
-        $eventTable = 'employees';
-        $callback = function (QueryStatement $query) {
-            $query->insert('employees_audit', function() {
-                return 'first_name=old.first_name,last_name=old.last_name';
-            });
-        };
+        $trigger = 'after_users_delete';
+        $eventObjectTable = 'users';
+        $statement = function() { return 'DELETE FROM users WHERE id = 1;';};
+
+        $blueprint = new Blueprint($trigger);
+        $blueprint->create()
+            ->on($eventObjectTable)
+            ->statement($statement)
+            ->after()
+            ->delete();
+
+        $connection = $this->getConnection();
+        $statements = $blueprint->toSql($connection, $this->getGrammar());
+
+        $actionStatement = 'CREATE TRIGGER after_users_delete AFTER DELETE ON `users` FOR EACH ROW BEGIN DELETE FROM users WHERE id = 1; END';
         
-        $blueprint = new Blueprint($trigger, $eventTable, $callback);
-        $blueprint->create()->before()->update();
-
-        $conn = $this->getConnection();
-        $statements = $blueprint->toSql($conn, $this->getGrammar());
-        
-        $createClause = 'delimiter $$ create trigger before_employees_update before update on employees for each row begin insert into employees_audit set first_name=old.first_name,last_name=old.last_name end$$ delimiter ;';
-
-        $this->assertEquals($createClause, $statements[0]);
-    }
-
-    public function testCreateTriggerToRunUpdateStatement()
-    {
-        $trigger = 'after_employees_insert';
-        $eventTable = 'employees';
-        $callback = function (QueryStatement $query) {
-            $query->update('employees_audit', function() {
-                return 'first_name=new.first_name,last_name=new.last_name';
-            });
-        };
-
-        $blueprint = new Blueprint($trigger, $eventTable, $callback);
-        $blueprint->create()->after()->insert();
-
-        $conn = $this->getConnection();
-        $statements = $blueprint->toSql($conn, $this->getGrammar());
-        
-        $createClause = 'delimiter $$ create trigger after_employees_insert after insert on employees for each row begin update employees_audit set first_name=new.first_name,last_name=new.last_name end$$ delimiter ;';
-
-        $this->assertEquals($createClause, $statements[0]);
-    }
-
-    public function testCreateTriggerToRunArbitraryStatement()
-    {
-        $trigger = 'after_orders_delete';
-        $eventTable = 'orders';
-        $callback = function (QueryStatement $query) {
-            $query->statement(function() {
-                return 'delete from orders where id = 1';
-            });
-        };
-
-        $blueprint = new Blueprint($trigger, $eventTable, $callback);
-        $blueprint->create()->after()->delete();
-
-        $conn = $this->getConnection();
-        $statements = $blueprint->toSql($conn, $this->getGrammar());
-        
-        $createClause = 'delimiter $$ create trigger after_orders_delete after delete on orders for each row begin delete from orders where id = 1; end$$ delimiter ;';
-
-        $this->assertEquals($createClause, $statements[0]);
+        $this->assertEquals($actionStatement, $statements[0]);
     }
 
     public function testDropTrigger()

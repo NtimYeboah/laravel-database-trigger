@@ -6,8 +6,7 @@ use Closure;
 use Illuminate\Database\Connection;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Event;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTime;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\QueryStatement;
+use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTiming;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlBuilder
@@ -34,11 +33,11 @@ class MySqlBuilder
     protected $trigger;
 
     /**
-     * Trigger event table
+     * Trigger event object table
      *
      * @var string
      */
-    protected $eventTable;
+    protected $eventObjectTable;
 
     /**
      * Statements to execute for trigger
@@ -48,12 +47,14 @@ class MySqlBuilder
     protected $callback;
 
     /**
-     * Trigger action time
+     * Trigger action timing
+     * 
+     * @var string
      */
-    protected $actionTime;
+    protected $actionTiming;
 
     /**
-     * Trigger event
+     * Event to activate trigger
      *
      * @var string
      */
@@ -71,35 +72,62 @@ class MySqlBuilder
         $this->grammar = $this->getDefaultGrammar();
     }
 
-    public function create($trigger, $eventTable, Closure $callback)
+    /**
+     * Create new trigger
+     * 
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     */
+    public function create($trigger)
     {
         $this->trigger = $trigger;
-        $this->eventTable = $eventTable;
+
+        return $this;
+    }
+
+    /**
+     * Event object table
+     * 
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     */
+    public function on($eventObjectTable)
+    {
+        $this->eventObjectTable = $eventObjectTable;
+
+        return $this;
+    }
+
+    /**
+     * Trigger statement
+     * 
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     */
+    public function statement(Closure $callback)
+    {
         $this->callback = $callback;
 
         return $this;
     }
 
     /**
-     * Trigger after action time
+     * Trigger after action timing
      * 
-     * @return NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function after()
     {
-        $this->actionTime = ActionTime::after();
+        $this->actionTiming = ActionTiming::after();
 
         return $this;
     }
 
     /**
-     * Trigger before action time
+     * Trigger before action timing
      * 
      * @return NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function before()
     {
-        $this->actionTime = ActionTime::before();
+        $this->actionTiming = ActionTiming::before();
 
         return $this;
     }
@@ -151,13 +179,13 @@ class MySqlBuilder
     }
 
     /**
-     * Get action time
+     * Get action timing
      * 
      * @return string
      */
-    protected function getActionTime()
+    protected function getActionTiming()
     {
-        return $this->actionTime;
+        return $this->actionTiming;
     }
 
     /**
@@ -171,19 +199,43 @@ class MySqlBuilder
     }
 
     /**
+     * Get trigger event object table
+     * 
+     * @return string
+     */
+    protected function getEventObjectTable()
+    {
+        return $this->eventObjectTable;
+    }
+
+    /**
+     * Get trigger statement
+     * 
+     * @return Closure
+     */
+    protected function getStatement()
+    {
+        return $this->callback;
+    }
+
+    /**
      * Call build to execute blueprint to build trigger
      * 
      * @return void
      */
     public function callBuild()
     {
-        $eventTime = $this->getActionTime();
+        $eventObjectTable = $this->getEventObjectTable();
+        $callback = $this->getStatement();
+        $actionTiming = $this->getActionTiming();
         $event = $this->getEvent();
 
-        $this->build(tap($this->createBlueprint($this->trigger, $this->eventTable, $this->callback), 
-            function (Blueprint $blueprint) use ($eventTime, $event) {
+        $this->build(tap($this->createBlueprint($this->trigger), 
+            function (Blueprint $blueprint) use ($eventObjectTable, $callback, $actionTiming, $event) {
                 $blueprint->create();
-                $blueprint->$eventTime();
+                $blueprint->on($eventObjectTable);
+                $blueprint->statement($callback);
+                $blueprint->$actionTiming();
                 $blueprint->$event();
             }
         ));
@@ -209,9 +261,9 @@ class MySqlBuilder
      * 
      * @return NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
-    protected function createBlueprint($trigger, $eventTable, Closure $callback = null)
+    protected function createBlueprint($trigger)
     {
-        return new Blueprint($trigger, $eventTable, $callback);
+        return new Blueprint($trigger);
     }
 
     /**
