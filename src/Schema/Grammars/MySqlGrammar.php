@@ -78,7 +78,7 @@ class MySqlGrammar extends Grammar
      * 
      * @return string
      */
-    public function compileDropIfExists(Blueprint $blueprint, Fluent $command, Connection $connection)
+    public function compileDropIfExists(Blueprint $blueprint)
     {
         return sprintf("drop trigger if exists %s", $blueprint->trigger);
     }
