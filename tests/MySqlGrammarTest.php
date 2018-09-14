@@ -40,7 +40,7 @@ class MySqlGrammarTest extends TestCase
     {
         $trigger = 'before_employees_update';
         $blueprint = new Blueprint($trigger);
-        $blueprint->dropIfExists('before_employees_update');
+        $blueprint->dropIfExists($trigger);
 
         $conn = $this->getConnection();
         $statement = $blueprint->toSql($conn, $this->getGrammar());

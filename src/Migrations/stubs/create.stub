@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use NtimYeboah\LaravelDatabaseTrigger\TriggerFacade as Schema;
+
+class DummyClass extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('DummyName')
+            ->on('DummyEventObjectTable')
+            ->statement(function() {
+                return '//...';
+            })
+            ->DummyActionTiming()
+            ->DummyEvent();
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('DummyEventObjectTable.DummyName');
+    }
+}
