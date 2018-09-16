@@ -31,7 +31,7 @@ class MySqlGrammarTest extends TestCase
         $connection = $this->getConnection();
         $statements = $blueprint->toSql($connection, $this->getGrammar());
 
-        $actionStatement = 'CREATE TRIGGER after_users_delete AFTER DELETE ON `users` FOR EACH ROW BEGIN DELETE FROM users WHERE id = 1; END';
+        $actionStatement = 'create trigger after_users_delete after delete on `users` for each row begin DELETE FROM users WHERE id = 1; end';
         
         $this->assertEquals($actionStatement, $statements[0]);
     }

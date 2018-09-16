@@ -9,14 +9,14 @@ class ActionTiming
      * 
      * @var string
      */
-    const ACTION_TIMING_AFTER = 'AFTER';
+    const ACTION_TIMING_AFTER = 'after';
 
     /**
      * Before action timing.
      * 
      * @var string
      */
-    const ACTION_TIMING_BEFORE = 'BEFORE';
+    const ACTION_TIMING_BEFORE = 'before';
 
     /**
      * Get after action timing.

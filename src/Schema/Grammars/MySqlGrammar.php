@@ -35,7 +35,18 @@ class MySqlGrammar extends Grammar
      */
     public function compileCreate(Blueprint $blueprint)
     {
-        return ("CREATE TRIGGER {$blueprint->trigger} {$this->validateActionTiming($blueprint)} {$this->validateEvent($blueprint)} ON `{$blueprint->eventObjectTable}` FOR EACH ROW BEGIN {$blueprint->statement} END");  
+        return ("create trigger {$blueprint->trigger} {$this->validateActionTiming($blueprint)} {$this->validateEvent($blueprint)} on `{$blueprint->eventObjectTable}` for each row begin {$blueprint->statement} end");  
+    }
+
+    /**
+     * Compile the query to determine the list of triggers.
+     *
+     * @return string
+     */
+    public function compileTriggerExists()
+    {
+        var_dump('Im called from here compileTriggerExists');
+        return 'select * from information_schema.triggers where trigger_schema = ? and trigger_name = ?';
     }
 
     /**

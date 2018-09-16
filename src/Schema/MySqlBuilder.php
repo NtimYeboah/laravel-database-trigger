@@ -169,13 +169,28 @@ class MySqlBuilder
     }
 
     /**
+     * Determine if the given trigger exists.
+     *
+     * @param  string  $trigger
+     * @return bool
+     */
+    public function hasTrigger($trigger)
+    {
+        return count($this->connection->select(
+            $this->grammar->compileTriggerExists(), [$trigger]
+        )) > 0;
+    }
+
+    /**
      * Drop trigger
      * 
      * @return void
      */
     public function dropIfExists($trigger)
     {
-        (new Blueprint($trigger))->dropIfExists();
+        $this->build(tap($this->createBlueprint($trigger), function ($blueprint) {
+            $blueprint->dropIfExists();
+        }));
     }
 
     /**
