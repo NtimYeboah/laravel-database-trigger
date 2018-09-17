@@ -59,21 +59,10 @@ class TriggerMakeCommand extends BaseCommand
         $name = Str::snake(trim($this->input->getArgument('name')));
 
         $eventObjectTable = $this->ask('Event object table name');
-        $actionTiming = $this->ask('Action timing. Possible values [after, before]');
-        $event = $this->ask('Event manipulation. Possible values [insert, update, delete]');
-
-        while (! $this->isValidActionTimingAndEvent($actionTiming, $event)) {
-            if (! $this->isValidActionTiming($actionTiming)) {
-                $this->error("Cannot use {$actionTiming} as trigger action timing.");
-            }
-
-            if (! $this->isValidEvent($event)) {
-                $this->error("Cannot use {$event} as trigger event manipulation");
-            }
-
-            $actionTiming = $this->ask('Action timing. Possible values [after, before]');
-            $event = $this->ask('Event manipulation. Possible values [insert, update, delete]');
-        }
+        $actionTiming = $this->choice('Action timing', ['after', 'before']);
+        $this->info("Action timing: {$actionTiming}");
+        $event = $this->choice('Event manipulation', ['insert', 'update', 'delete']);
+        $this->info("Event manipulation: {$event} \n");
 
         $this->writeMigration($name, $eventObjectTable, $actionTiming, $event);
 
@@ -113,41 +102,5 @@ class TriggerMakeCommand extends BaseCommand
     protected function usingRealPath()
     {
         return $this->input->hasOption('realpath') && $this->option('realpath');
-    }
-
-    /**
-     * Validate trigger action timing
-     * 
-     * @param string $actionTiming
-     * 
-     * @return bool
-     */
-    protected function isValidActionTiming($actionTiming)
-    {
-        return in_array(strtolower($actionTiming), ['after', 'before']);
-    }
-
-    /**
-     * Validate trigger event
-     * 
-     * @param string $event
-     * 
-     * @return bool
-     */
-    protected function isValidEvent($event)
-    {
-        return in_array(strtolower($event), ['insert', 'update', 'delete']);
-    }
-
-    /**
-     * Validate action timing and event
-     * 
-     * @param string $actionTiming
-     * @param string $event
-     * @return bool
-     */
-    protected function isValidActionTimingAndEvent($actionTiming, $event)
-    {
-        return $this->isValidActionTiming($actionTiming) && $this->isValidEvent($event);
     }
 }
