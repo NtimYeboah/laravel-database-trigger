@@ -6,8 +6,6 @@ use Closure;
 use Illuminate\Support\Fluent;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Grammars\Grammar;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\Event;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTiming;
 
 class Blueprint
 {
@@ -26,7 +24,7 @@ class Blueprint
     public $eventObjectTable;
 
     /**
-     * Event action timing
+     * Event action timing.
      *
      * @var string
      */
@@ -88,17 +86,17 @@ class Blueprint
     public function toSql(Connection $connection, Grammar $grammar)
     {
         $statements = [];
-        
+
         foreach ($this->commands as $command) {
-            $method = 'compile'. ucfirst($command->name);
-            
+            $method = 'compile'.ucfirst($command->name);
+
             if (method_exists($grammar, $method)) {
                 if (! is_null($sql = $grammar->$method($this))) {
                     $statements = array_merge($statements, (array) $sql);
                 }
             }
         }
-        
+
         return $statements;
     }
 
@@ -112,7 +110,7 @@ class Blueprint
         return $this->addCommand('dropIfExists');
     }
 
-     /**
+    /**
      * Indicate that the trigger needs to be created.
      *
      * @return \Illuminate\Support\Fluent
@@ -125,7 +123,7 @@ class Blueprint
     }
 
     /**
-     * Event object table
+     * Event object table.
      *
      * @param string $eventObjectTable
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
@@ -138,7 +136,7 @@ class Blueprint
     }
 
     /**
-     * Trigger statement
+     * Trigger statement.
      *
      * @param Closure $callback
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
@@ -185,7 +183,7 @@ class Blueprint
     }
 
     /**
-     * Trigger update event
+     * Trigger update event.
      *
      * @return void
      */
@@ -195,7 +193,7 @@ class Blueprint
     }
 
     /**
-     * Trigger delete event
+     * Trigger delete event.
      *
      * @return void
      */

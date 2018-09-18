@@ -34,7 +34,7 @@ class MySqlGrammar extends Grammar
      */
     public function compileCreate(Blueprint $blueprint)
     {
-        return ("create trigger {$blueprint->trigger} {$this->validateActionTiming($blueprint)} {$this->validateEvent($blueprint)} on `{$blueprint->eventObjectTable}` for each row begin {$blueprint->statement} end");  
+        return "create trigger {$blueprint->trigger} {$this->validateActionTiming($blueprint)} {$this->validateEvent($blueprint)} on `{$blueprint->eventObjectTable}` for each row begin {$blueprint->statement} end";
     }
 
     /**
@@ -86,6 +86,6 @@ class MySqlGrammar extends Grammar
      */
     public function compileDropIfExists(Blueprint $blueprint)
     {
-        return sprintf("drop trigger if exists %s", $blueprint->trigger);
+        return sprintf('drop trigger if exists %s', $blueprint->trigger);
     }
 }

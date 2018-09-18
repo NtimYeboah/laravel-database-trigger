@@ -4,15 +4,12 @@ namespace NtimYeboah\LaravelDatabaseTrigger\Schema;
 
 use Closure;
 use Illuminate\Database\Connection;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\Event;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\ActionTiming;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlBuilder
 {
     /**
-     * Database connection
+     * Database connection.
      *
      * @var \Illuminate\Database\Connection
      */
@@ -26,35 +23,35 @@ class MySqlBuilder
     protected $grammar;
 
     /**
-     * Trigger name
+     * Trigger name.
      *
      * @var sting
      */
     protected $trigger;
 
     /**
-     * Trigger event object table
+     * Trigger event object table.
      *
      * @var string
      */
     protected $eventObjectTable;
 
     /**
-     * Statements to execute for trigger
+     * Statements to execute for trigger.
      *
      * @var Closure
      */
     protected $callback;
 
     /**
-     * Trigger action timing
+     * Trigger action timing.
      *
      * @var string
      */
     protected $actionTiming;
 
     /**
-     * Event to activate trigger
+     * Event to activate trigger.
      *
      * @var string
      */
@@ -73,7 +70,7 @@ class MySqlBuilder
     }
 
     /**
-     * Create new trigger
+     * Create new trigger.
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
@@ -85,7 +82,7 @@ class MySqlBuilder
     }
 
     /**
-     * Event object table
+     * Event object table.
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
@@ -97,7 +94,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger statement
+     * Trigger statement.
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
@@ -109,7 +106,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger after action timing
+     * Trigger after action timing.
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
@@ -121,7 +118,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger before action timing
+     * Trigger before action timing.
      *
      * @return NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
@@ -133,7 +130,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger insert event
+     * Trigger insert event.
      *
      * @return void
      */
@@ -145,7 +142,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger update event
+     * Trigger update event.
      *
      * @return void
      */
@@ -157,7 +154,7 @@ class MySqlBuilder
     }
 
     /**
-     * Trigger delete event
+     * Trigger delete event.
      *
      * @return void
      */
@@ -183,7 +180,7 @@ class MySqlBuilder
     }
 
     /**
-     * Drop trigger
+     * Drop trigger.
      *
      * @return void
      */
@@ -195,7 +192,7 @@ class MySqlBuilder
     }
 
     /**
-     * Get action timing
+     * Get action timing.
      *
      * @return string
      */
@@ -205,7 +202,7 @@ class MySqlBuilder
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return string
      */
@@ -215,7 +212,7 @@ class MySqlBuilder
     }
 
     /**
-     * Get trigger event object table
+     * Get trigger event object table.
      *
      * @return string
      */
@@ -225,7 +222,7 @@ class MySqlBuilder
     }
 
     /**
-     * Get trigger statement
+     * Get trigger statement.
      *
      * @return Closure
      */
@@ -235,7 +232,7 @@ class MySqlBuilder
     }
 
     /**
-     * Call build to execute blueprint to build trigger
+     * Call build to execute blueprint to build trigger.
      *
      * @return void
      */
@@ -283,7 +280,7 @@ class MySqlBuilder
     }
 
     /**
-     * Get default schema grammar instance
+     * Get default schema grammar instance.
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
      */
