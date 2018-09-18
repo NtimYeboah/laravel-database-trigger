@@ -1,5 +1,5 @@
 Add database trigger to laravel migrations
-========================
+==========================================
 
 
 [![Build Status](https://travis-ci.org/NtimYeboah/laravel-database-trigger.svg?branch=master)](https://travis-ci.org/NtimYeboah/laravel-database-trigger)
@@ -24,21 +24,34 @@ Once installed, if you are not using automatic package discovery, then you need 
 
 
 ## Usage
-When the package is installed, `make:trigger` artisan command is added to the list of artisan commands.
-To generate a trigger migration file, use the `make:trigger` command. The command requires the name of the trigger and you have
-to supply the name of the event object table, action timing and the event that activates the trigger.
+Create a trigger migration file using the `make:trigger` artisan command. 
+The command requires the name of the trigger, name of the event object table, action timing and the event that activates the trigger.
 
 ```bash
 $ php artisan make:trigger after_users_update
 ```
 
-Possible values for action timing are `after` and `before`.
+### Event object table
+The event object table is the name of the table the trigger is associated with.
 
-Possible values for event are `insert`, `update` and `delete`.
+### Action timing
+The activation time for the trigger. Possible values are `after` and `before`. 
 
-For example, a trigger that uses `after_users_update` as a name, `users` as event object table name, `after` as action timing and `update` as event, the following trigger migration will be generated.
+`after` - Process action after the change is made on the event object table. 
+`before` - Process action prior to the change is made on the event object table.
+
+### Event
+The event to activate trigger. A trigger event can be `insert`, `update` and `delete`.
+
+`insert` - Activate trigger when an insert operation is performed on the event object table.
+`update` - Activate trigger when an update operation is performed on the event object tabble.
+`delete` - Activate trigger when a delete operation is performed on the event object table.
+
+
+The following trigger migration file will be generated for a trigger that uses `after_users_update` as a name, `users` as event object table name, `after` as action timing and `update` as event.
 
 ```php
+
 use Illuminate\Database\Migrations\Migration;
 use NtimYeboah\LaravelDatabaseTrigger\TriggerFacade as Schema;
 
@@ -70,6 +83,7 @@ class CreateAfterUsersUpdateTrigger extends Migration
         Schema::dropIfExists('users.after_users_update');
     }
 }
+
 ```
 
 Return the trigger statement from the closure of the `statement` method. 
@@ -80,7 +94,7 @@ The following is an example trigger migration to insert into the `users_audit` t
 
 ...
 
-/**
+    /**
      * Run the migrations.
      *
      * @return void
