@@ -71,14 +71,27 @@ class TriggerMakeCommand extends BaseCommand
         $this->composer->dumpAutoloads();
     }
 
+    /**
+     * Write to migration file
+     *
+     * @param string $name
+     * @param string $eventObjectTable
+     * @param string $actionTiming
+     * @param string $event
+     * @return void
+     */
     private function writeMigration($name, $eventObjectTable, $actionTiming, $event)
     {
         $file = pathinfo($this->creator->write(
-            $name, $eventObjectTable, $actionTiming, $event, $this->getMigrationPath()
+            $name,
+            $eventObjectTable,
+            $actionTiming,
+            $event,
+            $this->getMigrationPath()
         ), PATHINFO_FILENAME);
 
         $this->line("<info>Created Migration:</info> {$file}");
-    } 
+    }
 
     /**
      * Get migration path (either specified by '--path' option or default location).
