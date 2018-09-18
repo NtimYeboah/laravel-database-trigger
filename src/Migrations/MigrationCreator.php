@@ -2,10 +2,7 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Migrations;
 
-use Closure;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 
 class MigrationCreator extends BaseMigrationCreator
@@ -25,7 +22,7 @@ class MigrationCreator extends BaseMigrationCreator
         $this->ensureMigrationDoesntAlreadyExist($name);
 
         $stub = $this->files->get($this->stubPath().'/create.stub');
-        
+
         $this->files->put(
             $path = $this->getPath($name, $path),
             $this->populate($name, $eventObjectTable, $actionTiming, $event, $stub)
@@ -35,7 +32,7 @@ class MigrationCreator extends BaseMigrationCreator
     }
 
     /**
-     * Populate migration stub
+     * Populate migration stub.
      *
      * @param string $name
      * @param string $eventObjectTable
@@ -51,7 +48,7 @@ class MigrationCreator extends BaseMigrationCreator
         $stub = str_replace('DummyEventObjectTable', $eventObjectTable, $stub);
         $stub = str_replace('DummyActionTiming', $actionTiming, $stub);
         $stub = str_replace('DummyEvent', $event, $stub);
-        
+
         return $stub;
     }
 

@@ -5,7 +5,6 @@ namespace NtimYeboah\LaravelDatabaseTrigger\Test;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\QueryStatement;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlGrammarTest extends TestCase
@@ -34,7 +33,7 @@ class MySqlGrammarTest extends TestCase
         $statements = $blueprint->toSql($connection, $this->getGrammar());
 
         $actionStatement = 'create trigger after_users_delete after delete on `users` for each row begin DELETE FROM users WHERE id = 1; end';
-        
+
         $this->assertEquals($actionStatement, $statements[0]);
     }
 

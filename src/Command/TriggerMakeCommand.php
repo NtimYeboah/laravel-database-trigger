@@ -18,7 +18,6 @@ class TriggerMakeCommand extends BaseCommand
         {--path= : The location where the migration file should be created}
         {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths.}';
 
-
     /**
      * The console command description.
      *
@@ -27,21 +26,21 @@ class TriggerMakeCommand extends BaseCommand
     protected $description = 'Create a new trigger migration file';
 
     /**
-     * Migration creator instance
+     * Migration creator instance.
      *
      * @var \NtimYeboah\LaravelDatabaseTriggers\Migrations\MigrationCreator;
      */
     protected $creator;
 
     /**
-     * The composer instance
+     * The composer instance.
      *
      * @var \Illuminate\Support\Composer
      */
     protected $composer;
 
     /**
-     * Create a trigger migration instance
+     * Create a trigger migration instance.
      *
      * @param MigrationCreator $creator
      * @param Composer $composer
@@ -62,7 +61,7 @@ class TriggerMakeCommand extends BaseCommand
 
         $actionTiming = $this->choice('Action timing', ['after', 'before']);
         $this->info("Action timing: {$actionTiming}");
-        
+
         $event = $this->choice('Event manipulation', ['insert', 'update', 'delete']);
         $this->info("Event manipulation: {$event} \n");
 
@@ -72,7 +71,7 @@ class TriggerMakeCommand extends BaseCommand
     }
 
     /**
-     * Write to migration file
+     * Write to migration file.
      *
      * @param string $name
      * @param string $eventObjectTable
