@@ -29,14 +29,14 @@ class TriggerMakeCommand extends BaseCommand
     /**
      * Migration creator instance
      *
-     * @var NtimYeboah\LaravelDatabaseTriggers\Migrations\MigrationCreator;
+     * @var \NtimYeboah\LaravelDatabaseTriggers\Migrations\MigrationCreator;
      */
     protected $creator;
 
     /**
      * The composer instance
      *
-     * @var Illuminate\Support\Composer
+     * @var \Illuminate\Support\Composer
      */
     protected $composer;
 

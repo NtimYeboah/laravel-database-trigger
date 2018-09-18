@@ -115,7 +115,7 @@ class Blueprint
      /**
      * Indicate that the trigger needs to be created.
      *
-     * @return \Illuminate\Support\Fluent
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     public function create()
     {

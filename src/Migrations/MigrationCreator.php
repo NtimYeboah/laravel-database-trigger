@@ -18,7 +18,7 @@ class MigrationCreator extends BaseMigrationCreator
      * @param string $actionTiming
      * @param string $event
      * @param string|null $path
-     * @return void
+     * @return string
      */
     public function write($name, $eventObjectTable, $actionTiming, $event, $path)
     {

@@ -9,7 +9,7 @@ class TriggerFacade extends Facade
     /**
      * Get a schema builder instance for the default connection.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return string
      */
     protected static function getFacadeAccessor()
     {

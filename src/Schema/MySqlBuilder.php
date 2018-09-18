@@ -21,14 +21,14 @@ class MySqlBuilder
     /**
      * The schema grammar instance.
      *
-     * @var \Illuminate\Database\Schema\Grammars\Grammar
+     * @var \NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
      */
     protected $grammar;
 
     /**
      * Trigger name
      *
-     * @var sting
+     * @var string
      */
     protected $trigger;
 
@@ -123,7 +123,7 @@ class MySqlBuilder
     /**
      * Trigger before action timing
      *
-     * @return NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function before()
     {
@@ -261,7 +261,7 @@ class MySqlBuilder
     /**
      * Execute the blueprint to build trigger.
      *
-     * @param  NtimYeboah\LaravelDatabaseTriggers\Schema\Blueprint  $blueprint
+     * @param  \NtimYeboah\LaravelDatabaseTriggers\Schema\Blueprint  $blueprint
      * @return void
      */
     protected function build(Blueprint $blueprint)
@@ -275,7 +275,7 @@ class MySqlBuilder
      * @param string $trigger
      * @param string $eventTable
      * @param Closure $callback
-     * @return NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     protected function createBlueprint($trigger)
     {
