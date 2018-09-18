@@ -40,7 +40,7 @@ class Blueprint
     public $event;
 
     /**
-     * Statement to run. 
+     * Statement to run.
      *
      * @var string|array
      */
@@ -57,12 +57,11 @@ class Blueprint
      * Create a new schema blueprint.
      *
      * @param string $trigger
-     * 
      * @return void
      */
     public function __construct($trigger)
     {
-        $this->trigger = $trigger;   
+        $this->trigger = $trigger;
     }
 
     /**
@@ -70,7 +69,6 @@ class Blueprint
      *
      * @param  \Illuminate\Database\Connection $connection
      * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
-     * 
      * @return void
      */
     public function build(Connection $connection, Grammar $grammar)
@@ -85,7 +83,6 @@ class Blueprint
      *
      * @param  \Illuminate\Database\Connection $connection
      * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
-     * 
      * @return array
      */
     public function toSql(Connection $connection, Grammar $grammar)
@@ -129,9 +126,8 @@ class Blueprint
 
     /**
      * Event object table
-     * 
+     *
      * @param string $eventObjectTable
-     * 
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     public function on($eventObjectTable)
@@ -143,9 +139,8 @@ class Blueprint
 
     /**
      * Trigger statement
-     * 
+     *
      * @param Closure $callback
-     * 
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     public function statement(Closure $callback)
@@ -181,7 +176,7 @@ class Blueprint
 
     /**
      * Trigger insert event.
-     * 
+     *
      * @return void
      */
     public function insert()
@@ -191,21 +186,21 @@ class Blueprint
 
     /**
      * Trigger update event
-     * 
+     *
      * @return void
      */
     public function update()
-    {        
+    {
         $this->event = Event::update();
     }
 
     /**
      * Trigger delete event
-     * 
+     *
      * @return void
      */
     public function delete()
-    {        
+    {
         $this->event = Event::delete();
     }
 
@@ -214,7 +209,6 @@ class Blueprint
      *
      * @param string $name
      * @param array $parameters
-     * 
      * @return \Illuminate\Support\Fluent
      */
     protected function addCommand($name, array $parameters = [])
@@ -229,7 +223,6 @@ class Blueprint
      *
      * @param string $name
      * @param array $parameters
-     * 
      * @return \Illuminate\Support\Fluent
      */
     protected function createCommand($name, array $parameters = [])

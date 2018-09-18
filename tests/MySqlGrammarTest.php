@@ -19,7 +19,9 @@ class MySqlGrammarTest extends TestCase
     {
         $trigger = 'after_users_delete';
         $eventObjectTable = 'users';
-        $statement = function() { return 'DELETE FROM users WHERE id = 1;';};
+        $statement = function () {
+            return 'DELETE FROM users WHERE id = 1;';
+        };
 
         $blueprint = new Blueprint($trigger);
         $blueprint->create()

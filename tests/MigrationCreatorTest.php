@@ -29,6 +29,7 @@ class MigrationCreatorTest extends TestCase
     {
         $files = m::mock('Illuminate\Filesystem\Filesystem');
 
-        return $this->getMockBuilder('NtimYeboah\LaravelDatabaseTrigger\Migrations\MigrationCreator')->setMethods(['getDatePrefix'])->setConstructorArgs([$files])->getMock();
+        return $this->getMockBuilder('NtimYeboah\LaravelDatabaseTrigger\Migrations\MigrationCreator')
+            ->setMethods(['getDatePrefix'])->setConstructorArgs([$files])->getMock();
     }
 }

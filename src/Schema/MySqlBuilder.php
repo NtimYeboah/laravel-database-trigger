@@ -27,7 +27,7 @@ class MySqlBuilder
 
     /**
      * Trigger name
-     * 
+     *
      * @var sting
      */
     protected $trigger;
@@ -41,14 +41,14 @@ class MySqlBuilder
 
     /**
      * Statements to execute for trigger
-     * 
+     *
      * @var Closure
      */
     protected $callback;
 
     /**
      * Trigger action timing
-     * 
+     *
      * @var string
      */
     protected $actionTiming;
@@ -74,7 +74,7 @@ class MySqlBuilder
 
     /**
      * Create new trigger
-     * 
+     *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function create($trigger)
@@ -86,7 +86,7 @@ class MySqlBuilder
 
     /**
      * Event object table
-     * 
+     *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function on($eventObjectTable)
@@ -98,7 +98,7 @@ class MySqlBuilder
 
     /**
      * Trigger statement
-     * 
+     *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function statement(Closure $callback)
@@ -110,7 +110,7 @@ class MySqlBuilder
 
     /**
      * Trigger after action timing
-     * 
+     *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function after()
@@ -122,7 +122,7 @@ class MySqlBuilder
 
     /**
      * Trigger before action timing
-     * 
+     *
      * @return NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function before()
@@ -158,7 +158,7 @@ class MySqlBuilder
 
     /**
      * Trigger delete event
-     * 
+     *
      * @return void
      */
     public function delete()
@@ -177,13 +177,14 @@ class MySqlBuilder
     public function hasTrigger($trigger)
     {
         return count($this->connection->select(
-            $this->grammar->compileTriggerExists(), [$trigger]
+            $this->grammar->compileTriggerExists(),
+            [$trigger]
         )) > 0;
     }
 
     /**
      * Drop trigger
-     * 
+     *
      * @return void
      */
     public function dropIfExists($trigger)
@@ -195,7 +196,7 @@ class MySqlBuilder
 
     /**
      * Get action timing
-     * 
+     *
      * @return string
      */
     protected function getActionTiming()
@@ -205,7 +206,7 @@ class MySqlBuilder
 
     /**
      * Get event
-     * 
+     *
      * @return string
      */
     protected function getEvent()
@@ -215,7 +216,7 @@ class MySqlBuilder
 
     /**
      * Get trigger event object table
-     * 
+     *
      * @return string
      */
     protected function getEventObjectTable()
@@ -225,7 +226,7 @@ class MySqlBuilder
 
     /**
      * Get trigger statement
-     * 
+     *
      * @return Closure
      */
     protected function getStatement()
@@ -235,7 +236,7 @@ class MySqlBuilder
 
     /**
      * Call build to execute blueprint to build trigger
-     * 
+     *
      * @return void
      */
     public function callBuild()
@@ -245,7 +246,8 @@ class MySqlBuilder
         $actionTiming = $this->getActionTiming();
         $event = $this->getEvent();
 
-        $this->build(tap($this->createBlueprint($this->trigger), 
+        $this->build(tap(
+            $this->createBlueprint($this->trigger),
             function (Blueprint $blueprint) use ($eventObjectTable, $callback, $actionTiming, $event) {
                 $blueprint->create();
                 $blueprint->on($eventObjectTable);
@@ -273,7 +275,6 @@ class MySqlBuilder
      * @param string $trigger
      * @param string $eventTable
      * @param Closure $callback
-     * 
      * @return NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
      */
     protected function createBlueprint($trigger)

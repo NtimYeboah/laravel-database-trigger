@@ -19,7 +19,7 @@ class TriggerServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton('trigger-builder', function() {
+        $this->app->singleton('trigger-builder', function () {
             return new MySqlBuilder(app('db.connection'));
         });
     }

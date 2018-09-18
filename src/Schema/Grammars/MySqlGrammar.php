@@ -30,7 +30,6 @@ class MySqlGrammar extends Grammar
      * @param Blueprint $blueprint
      * @param Fluent $command
      * @param Connection $connection
-     * 
      * @return string
      */
     public function compileCreate(Blueprint $blueprint)
@@ -52,7 +51,6 @@ class MySqlGrammar extends Grammar
      * Validate event.
      *
      * @param string $event
-     * 
      * @return string
      */
     private function validateEvent(Blueprint $blueprint)
@@ -66,9 +64,8 @@ class MySqlGrammar extends Grammar
 
     /**
      * Validate action time.
-     * 
+     *
      * @param string $actionTime
-     * 
      * @return string
      */
     private function validateActionTiming(Blueprint $blueprint)
@@ -85,7 +82,6 @@ class MySqlGrammar extends Grammar
      *
      * @param string $triggerTable
      * @param string $triggerName
-     * 
      * @return string
      */
     public function compileDropIfExists(Blueprint $blueprint)

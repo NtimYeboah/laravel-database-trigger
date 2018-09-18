@@ -6,21 +6,21 @@ class Event
 {
     /**
      * Trigger insert event
-     * 
+     *
      * @var string
      */
     const INSERT_EVENT = 'insert';
 
     /**
      * Trigger update event
-     * 
+     *
      * @var string
      */
     const UPDATE_EVENT = 'update';
 
     /**
      * Trigger delete event
-     * 
+     *
      * @var string
      */
     const DELETE_EVENT = 'delete';
@@ -37,7 +37,7 @@ class Event
 
     /**
      * Get trigger update event
-     * 
+     *
      * @var string
      */
     public static function update()
@@ -47,7 +47,7 @@ class Event
 
     /**
      * Get trigger delete event
-     * 
+     *
      * @var string
      */
     public static function delete()

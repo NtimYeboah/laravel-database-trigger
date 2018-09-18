@@ -18,7 +18,6 @@ class MigrationCreator extends BaseMigrationCreator
      * @param string $actionTiming
      * @param string $event
      * @param string|null $path
-     * 
      * @return void
      */
     public function write($name, $eventObjectTable, $actionTiming, $event, $path)
@@ -37,13 +36,12 @@ class MigrationCreator extends BaseMigrationCreator
 
     /**
      * Populate migration stub
-     * 
+     *
      * @param string $name
      * @param string $eventObjectTable
      * @param string $actionTiming
      * @param string $event
      * @param string $stub
-     * 
      * @return string;
      */
     protected function populate($name, $eventObjectTable, $actionTiming, $event, $stub)
@@ -75,7 +73,6 @@ class MigrationCreator extends BaseMigrationCreator
      *
      * @param  string  $name
      * @param  string  $path
-     * 
      * @return string
      */
     protected function getPath($name, $path)

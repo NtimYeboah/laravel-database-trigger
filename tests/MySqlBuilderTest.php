@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder as Builder;
 
-
 class MySqlBuilderTest extends TestCase
 {
     public function tearDown()
