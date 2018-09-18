@@ -6,34 +6,10 @@ use Closure;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
 
-class MigrationCreator
+class MigrationCreator extends BaseMigrationCreator
 {
-    /**
-     * The filesystem instance
-     *
-     * @var Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
-    /**
-     * The registered post create hooks
-     *
-     * @var array
-     */
-    protected $postCreate = [];
-
-    /**
-     * Create a new migration creator instance.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @return void
-     */
-    public function __construct(Filesystem $files)
-    {
-        $this->files = $files;
-    }
-
     /**
      * Create a new migration at the given path.
      *
@@ -45,7 +21,7 @@ class MigrationCreator
      * 
      * @return void
      */
-    public function create($name, $eventObjectTable, $actionTiming, $event, $path)
+    public function write($name, $eventObjectTable, $actionTiming, $event, $path)
     {
         $this->ensureMigrationDoesntAlreadyExist($name);
 
@@ -53,27 +29,10 @@ class MigrationCreator
         
         $this->files->put(
             $path = $this->getPath($name, $path),
-            $this->populateStub($name, $eventObjectTable, $actionTiming, $event, $stub)
+            $this->populate($name, $eventObjectTable, $actionTiming, $event, $stub)
         );
 
-        $this->firePostCreateHooks();
-
         return $path;
-    }
-
-    /**
-     * Ensure that a migration with the given name doesn't already exist.
-     *
-     * @param  string $name
-     * @return void
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function ensureMigrationDoesntAlreadyExist($name)
-    {
-        if (class_exists($className = $this->getClassName($name))) {
-            throw new InvalidArgumentException("A {$className} class already exists.");
-        }
     }
 
     /**
@@ -87,7 +46,7 @@ class MigrationCreator
      * 
      * @return string;
      */
-    protected function populateStub($name, $eventObjectTable, $actionTiming, $event, $stub)
+    protected function populate($name, $eventObjectTable, $actionTiming, $event, $stub)
     {
         $stub = str_replace('DummyClass', $this->getClassName($name), $stub);
         $stub = str_replace('DummyName', $name, $stub);
@@ -112,39 +71,6 @@ class MigrationCreator
     }
 
     /**
-     * Fire the registered post create hooks.
-     *
-     * @return void
-     */
-    protected function firePostCreateHooks()
-    {
-        foreach ($this->postCreate as $callback) {
-            call_user_func($callback);
-        }
-    }
-
-    /**
-     * Register a post migration create hook.
-     *
-     * @param  \Closure  $callback
-     * @return void
-     */
-    public function afterCreate(Closure $callback)
-    {
-        $this->postCreate[] = $callback;
-    }
-
-    /**
-     * Get the path to the stubs.
-     *
-     * @return string
-     */
-    public function stubPath()
-    {
-        return __DIR__.'/stubs';
-    }
-
-    /**
      * Get the full path to the migration.
      *
      * @param  string  $name
@@ -158,22 +84,12 @@ class MigrationCreator
     }
 
     /**
-     * Get the date prefix for the migration.
+     * Get the path to the stubs.
      *
      * @return string
      */
-    protected function getDatePrefix()
+    public function stubPath()
     {
-        return date('Y_m_d_His');
-    }
-
-    /**
-     * Get the filesystem instance.
-     *
-     * @return \Illuminate\Filesystem\Filesystem
-     */
-    public function getFilesystem()
-    {
-        return $this->files;
+        return __DIR__.'/stubs';
     }
 }

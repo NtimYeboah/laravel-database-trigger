@@ -45,7 +45,6 @@ class MySqlGrammar extends Grammar
      */
     public function compileTriggerExists()
     {
-        var_dump('Im called from here compileTriggerExists');
         return 'select * from information_schema.triggers where trigger_schema = ? and trigger_name = ?';
     }
 

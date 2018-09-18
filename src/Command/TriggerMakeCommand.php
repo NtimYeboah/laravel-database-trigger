@@ -59,8 +59,10 @@ class TriggerMakeCommand extends BaseCommand
         $name = Str::snake(trim($this->input->getArgument('name')));
 
         $eventObjectTable = $this->ask('Event object table name');
+
         $actionTiming = $this->choice('Action timing', ['after', 'before']);
         $this->info("Action timing: {$actionTiming}");
+        
         $event = $this->choice('Event manipulation', ['insert', 'update', 'delete']);
         $this->info("Event manipulation: {$event} \n");
 
@@ -71,7 +73,7 @@ class TriggerMakeCommand extends BaseCommand
 
     private function writeMigration($name, $eventObjectTable, $actionTiming, $event)
     {
-        $file = pathinfo($this->creator->create(
+        $file = pathinfo($this->creator->write(
             $name, $eventObjectTable, $actionTiming, $event, $this->getMigrationPath()
         ), PATHINFO_FILENAME);
 
