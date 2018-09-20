@@ -17,7 +17,7 @@ The package currently supports MySQL only.
 To get the latest version, simply require the package using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require NtimYeboah/laravel-database-trigger
+$ composer require ntimyeboah/laravel-database-trigger
 ```
 
 Once installed, if you are not using automatic package discovery, then you need to register the `NtimYeboah\LaravelDatabaseTrigger\TriggerServiceProvider` service provider in your `config/app.php`.
@@ -46,7 +46,7 @@ The event to activate trigger. A trigger event can be `insert`, `update` and `de
 
 `insert` - Activate trigger when an insert operation is performed on the event object table.
 
-`update` - Activate trigger when an update operation is performed on the event object tabble.
+`update` - Activate trigger when an update operation is performed on the event object table.
 
 `delete` - Activate trigger when a delete operation is performed on the event object table.
 
