@@ -14,7 +14,7 @@ class DummyClass extends Migration
     {
         Schema::create('DummyName')
             ->on('DummyEventObjectTable')
-            ->statement(function() {
+            ->statement(function () {
                 return '//...';
             })
             ->DummyActionTiming()
