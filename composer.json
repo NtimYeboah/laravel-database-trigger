@@ -1,5 +1,5 @@
 {
-    "name": "NtimYeboah/laravel-database-trigger",
+    "name": "ntimyeboah/laravel-database-trigger",
     "description": "A package to add database trigger to laravel migrations",
     "keywords": [
         "NtimYeboah",
