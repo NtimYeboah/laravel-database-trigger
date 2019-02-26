@@ -8,11 +8,6 @@ use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder as Builder;
 
 class MySqlBuilderTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
-
     public function testTriggerCorrectlyCallsGrammar()
     {
         $connection = m::mock('Illuminate\Database\Connection');
