@@ -2,16 +2,11 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Test;
 
-use Mockery as m;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class MigrationCreatorTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
-
     public function testTriggerCreationMigrationStoresMigrationFile()
     {
         $creator = $this->getCreator();
