@@ -9,11 +9,6 @@ use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlGrammarTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
-
     public function testCanCreateTrigger()
     {
         $trigger = 'after_users_delete';
