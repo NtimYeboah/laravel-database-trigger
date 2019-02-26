@@ -9,7 +9,7 @@ use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlGrammarTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
