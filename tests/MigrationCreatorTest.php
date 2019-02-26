@@ -2,7 +2,7 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Test;
 
-use Mockery;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class MigrationCreatorTest extends TestCase
