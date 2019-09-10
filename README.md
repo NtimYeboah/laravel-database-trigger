@@ -2,7 +2,7 @@ Add database trigger to laravel migrations
 ==========================================
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/NtimYeboah/laravel-database-trigger.svg?style=flat-square)](https://travis-ci.org/NtimYeboah/laravel-database-trigger)
+[![Build Status](https://img.shields.io/travis/DariusIII/laravel-database-trigger.svg?style=flat-square)](https://travis-ci.org/DariusIII/laravel-database-trigger)
 [![StyleCI](https://github.styleci.io/repos/7548986/shield)](https://styleci.io/repos/7548986)
 
 Laravel Database Trigger provides a way to add database trigger to laravel migrations just like you would with database table. 
@@ -20,7 +20,7 @@ To get the latest version, simply require the package using [Composer](https://g
 $ composer require ntimyeboah/laravel-database-trigger
 ```
 
-Once installed, if you are not using automatic package discovery, then you need to register the `NtimYeboah\LaravelDatabaseTrigger\TriggerServiceProvider` service provider in your `config/app.php`.
+Once installed, if you are not using automatic package discovery, then you need to register the `DariusIII\LaravelDatabaseTrigger\TriggerServiceProvider` service provider in your `config/app.php`.
 
 
 ## Usage
@@ -56,7 +56,7 @@ The following trigger migration file will be generated for a trigger that uses `
 ```php
 
 use Illuminate\Database\Migrations\Migration;
-use NtimYeboah\LaravelDatabaseTrigger\TriggerFacade as Schema;
+use DariusIII\LaravelDatabaseTrigger\TriggerFacade as Schema;
 
 class CreateAfterUsersUpdateTrigger extends Migration
 {
@@ -127,11 +127,11 @@ $ composer test
 
 ## Changelog
 
-Please see [CHANGELOG](https://github.com/NtimYeboah/laravel-database-trigger/blob/master/CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](https://github.com/DariusIII/laravel-database-trigger/blob/master/CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/NtimYeboah/laravel-database-trigger/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/DariusIII/laravel-database-trigger/blob/master/CONTRIBUTING.md) for details.
 
 
 ## Security

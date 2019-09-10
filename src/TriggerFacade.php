@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger;
+namespace DariusIII\LaravelDatabaseTrigger;
 
 use Illuminate\Support\Facades\Facade;
 

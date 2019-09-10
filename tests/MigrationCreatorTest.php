@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger\Test;
+namespace DariusIII\LaravelDatabaseTrigger\Test;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +24,7 @@ class MigrationCreatorTest extends TestCase
     {
         $files = m::mock('Illuminate\Filesystem\Filesystem');
 
-        return $this->getMockBuilder('NtimYeboah\LaravelDatabaseTrigger\Migrations\MigrationCreator')
+        return $this->getMockBuilder('DariusIII\LaravelDatabaseTrigger\Migrations\MigrationCreator')
             ->setMethods(['getDatePrefix'])->setConstructorArgs([$files])->getMock();
     }
 }

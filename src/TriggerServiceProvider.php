@@ -1,10 +1,10 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger;
+namespace DariusIII\LaravelDatabaseTrigger;
 
 use Illuminate\Support\ServiceProvider;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder;
-use NtimYeboah\LaravelDatabaseTrigger\Command\TriggerMakeCommand;
+use DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder;
+use DariusIII\LaravelDatabaseTrigger\Command\TriggerMakeCommand;
 
 class TriggerServiceProvider extends ServiceProvider
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger\Schema;
+namespace DariusIII\LaravelDatabaseTrigger\Schema;
 
 use Closure;
 use Illuminate\Database\Connection;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
+use DariusIII\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
 
 class MySqlBuilder
 {
@@ -18,7 +18,7 @@ class MySqlBuilder
     /**
      * The schema grammar instance.
      *
-     * @var \NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
+     * @var \DariusIII\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
      */
     protected $grammar;
 
@@ -72,7 +72,7 @@ class MySqlBuilder
     /**
      * Create new trigger.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function create($trigger)
     {
@@ -84,7 +84,7 @@ class MySqlBuilder
     /**
      * Event object table.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function on($eventObjectTable)
     {
@@ -96,7 +96,7 @@ class MySqlBuilder
     /**
      * Trigger statement.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function statement(Closure $callback)
     {
@@ -108,7 +108,7 @@ class MySqlBuilder
     /**
      * Trigger after action timing.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function after()
     {
@@ -120,7 +120,7 @@ class MySqlBuilder
     /**
      * Trigger before action timing.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\MySqlBuilder
      */
     public function before()
     {
@@ -258,7 +258,7 @@ class MySqlBuilder
     /**
      * Execute the blueprint to build trigger.
      *
-     * @param  \NtimYeboah\LaravelDatabaseTriggers\Schema\Blueprint  $blueprint
+     * @param  \DariusIII\LaravelDatabaseTriggers\Schema\Blueprint  $blueprint
      * @return void
      */
     protected function build(Blueprint $blueprint)
@@ -272,7 +272,7 @@ class MySqlBuilder
      * @param string $trigger
      * @param string $eventTable
      * @param Closure $callback
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\Blueprint
      */
     protected function createBlueprint($trigger)
     {
@@ -282,7 +282,7 @@ class MySqlBuilder
     /**
      * Get default schema grammar instance.
      *
-     * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
+     * @return \DariusIII\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
      */
     protected function getDefaultGrammar()
     {

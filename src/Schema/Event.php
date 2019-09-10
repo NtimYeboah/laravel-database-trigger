@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger\Schema;
+namespace DariusIII\LaravelDatabaseTrigger\Schema;
 
 class Event
 {

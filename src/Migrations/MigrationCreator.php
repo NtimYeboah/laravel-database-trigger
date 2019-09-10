@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger\Migrations;
+namespace DariusIII\LaravelDatabaseTrigger\Migrations;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
