@@ -2,9 +2,9 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Command;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Composer;
 use Illuminate\Database\Console\Migrations\BaseCommand;
+use Illuminate\Support\Composer;
+use Illuminate\Support\Str;
 use NtimYeboah\LaravelDatabaseTrigger\Migrations\MigrationCreator;
 
 class TriggerMakeCommand extends BaseCommand

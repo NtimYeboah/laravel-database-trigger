@@ -3,8 +3,8 @@
 namespace NtimYeboah\LaravelDatabaseTrigger\Test;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder as Builder;
+use PHPUnit\Framework\TestCase;
 
 class MySqlBuilderTest extends TestCase
 {
