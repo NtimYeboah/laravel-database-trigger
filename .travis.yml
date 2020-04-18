@@ -20,4 +20,4 @@ before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
 
 script:
-  - phpunit --debug --no-coverage
+  - vendor/bin/phpunit --debug --no-coverage
