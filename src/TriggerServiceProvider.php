@@ -3,8 +3,8 @@
 namespace NtimYeboah\LaravelDatabaseTrigger;
 
 use Illuminate\Support\ServiceProvider;
-use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder;
 use NtimYeboah\LaravelDatabaseTrigger\Command\TriggerMakeCommand;
+use NtimYeboah\LaravelDatabaseTrigger\Schema\MySqlBuilder;
 
 class TriggerServiceProvider extends ServiceProvider
 {

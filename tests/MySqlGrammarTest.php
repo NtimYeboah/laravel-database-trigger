@@ -3,9 +3,9 @@
 namespace NtimYeboah\LaravelDatabaseTrigger\Test;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Blueprint;
 use NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar;
+use PHPUnit\Framework\TestCase;
 
 class MySqlGrammarTest extends TestCase
 {
