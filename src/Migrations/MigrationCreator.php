@@ -2,8 +2,8 @@
 
 namespace NtimYeboah\LaravelDatabaseTrigger\Migrations;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
+use Illuminate\Support\Str;
 
 class MigrationCreator extends BaseMigrationCreator
 {
