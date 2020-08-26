@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class MigrationCreatorTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
