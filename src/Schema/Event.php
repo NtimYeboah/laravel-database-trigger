@@ -9,21 +9,21 @@ class Event
      *
      * @var string
      */
-    const INSERT_EVENT = 'insert';
+    public const INSERT_EVENT = 'insert';
 
     /**
      * Trigger update event.
      *
      * @var string
      */
-    const UPDATE_EVENT = 'update';
+    public const UPDATE_EVENT = 'update';
 
     /**
      * Trigger delete event.
      *
      * @var string
      */
-    const DELETE_EVENT = 'delete';
+    public const DELETE_EVENT = 'delete';
 
     /**
      * Get trigger insert event.

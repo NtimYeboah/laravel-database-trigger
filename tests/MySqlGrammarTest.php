@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class MySqlGrammarTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -58,6 +58,6 @@ class MySqlGrammarTest extends TestCase
 
     private function getGrammar()
     {
-        return new MySqlGrammar;
+        return new MySqlGrammar();
     }
 }

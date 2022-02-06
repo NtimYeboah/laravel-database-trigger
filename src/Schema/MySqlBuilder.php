@@ -286,6 +286,6 @@ class MySqlBuilder
      */
     protected function getDefaultGrammar()
     {
-        return new MySqlGrammar;
+        return new MySqlGrammar();
     }
 }
