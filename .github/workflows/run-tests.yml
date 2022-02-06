@@ -1,0 +1,36 @@
+name: run-tests
+
+on: [push, pull_request]
+
+jobs:
+    tests:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest]
+                php: [7.4]
+                laravel: [5.8.*]
+                dependency-version: [prefer-lowest, prefer-stable]
+                include:
+                  - laravel: 5.8.*
+
+        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup PHP 7.4
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: ${{ matrix.php }}
+                extensions: curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, iconv
+                coverage: none
+
+            - name: Install dependencies
+              run: |
+                composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+                
+            - name: Execute tests
+                run: vendor/bin/phpunit
