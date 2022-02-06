@@ -38,13 +38,16 @@ The event object table is the name of the table the trigger is associated with.
 The activation time for the trigger. Possible values are `after` and `before`. 
 
 `after` - Process action after the change is made on the event object table. 
+
 `before` - Process action prior to the change is made on the event object table.
 
 ### Event
 The event to activate trigger. A trigger event can be `insert`, `update` and `delete`.
 
 `insert` - Activate trigger when an insert operation is performed on the event object table.
+
 `update` - Activate trigger when an update operation is performed on the event object table.
+
 `delete` - Activate trigger when a delete operation is performed on the event object table.
 
 

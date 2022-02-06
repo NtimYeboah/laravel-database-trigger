@@ -28,9 +28,8 @@ class MigrationCreatorTest extends TestCase
     protected function getCreator()
     {
         $files = m::mock('Illuminate\Filesystem\Filesystem');
-        $customStubs = 'stubs';
 
         return $this->getMockBuilder('NtimYeboah\LaravelDatabaseTrigger\Migrations\MigrationCreator')
-            ->setMethods(['getDatePrefix'])->setConstructorArgs([$files, $customStubs])->getMock();
+            ->setMethods(['getDatePrefix'])->setConstructorArgs([$files, 'stubs'])->getMock();
     }
 }
