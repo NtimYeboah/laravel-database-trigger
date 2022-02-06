@@ -10,7 +10,7 @@ A trigger is a named database object that is associated with a table, and that a
 
 ## Installation
 
-Laravel Database Trigger requires at least [PHP](https://php.net) 7.2. This particular version supports Laravel v6.20.*. For other older versions of Laravel check v1 and v2 branches.
+Laravel Database Trigger requires at least [PHP](https://php.net) 7.4. This particular version supports Laravel v6.20.*. For other older versions of Laravel check v1 and v2 branches.
 
 The package currently supports MySQL only.
 
