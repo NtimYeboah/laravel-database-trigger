@@ -58,6 +58,6 @@ class MySqlGrammarTest extends TestCase
 
     private function getGrammar()
     {
-        return new MySqlGrammar;
+        return new MySqlGrammar();
     }
 }
