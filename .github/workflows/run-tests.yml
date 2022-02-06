@@ -33,4 +33,4 @@ jobs:
                 composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
                 
             - name: Execute tests
-                run: vendor/bin/phpunit
+              run: vendor/bin/phpunit
