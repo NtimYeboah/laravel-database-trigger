@@ -12,7 +12,8 @@ class MigrationCreatorTest extends TestCase
         m::close();
     }
 
-    public function testTriggerCreationMigrationStoresMigrationFile()
+    /** @test */
+    public function trigger_creation_migration_stores_migration_file()
     {
         $creator = $this->getCreator();
         $creator->expects($this->any())->method('getDatePrefix')->will($this->returnValue('foo'));
