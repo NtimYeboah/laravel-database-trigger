@@ -14,7 +14,8 @@ class MySqlGrammarTest extends TestCase
         m::close();
     }
 
-    public function testCanCreateTrigger()
+    /** @test */
+    public function can_create_trigger()
     {
         $trigger = 'after_users_delete';
         $eventObjectTable = 'users';
@@ -37,7 +38,8 @@ class MySqlGrammarTest extends TestCase
         $this->assertEquals($actionStatement, $statements[0]);
     }
 
-    public function testDropTrigger()
+    /** @test */
+    public function drop_trigger()
     {
         $trigger = 'before_employees_update';
         $blueprint = new Blueprint($trigger);

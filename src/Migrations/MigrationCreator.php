@@ -3,10 +3,37 @@
 namespace NtimYeboah\LaravelDatabaseTrigger\Migrations;
 
 use Illuminate\Database\Migrations\MigrationCreator as BaseMigrationCreator;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class MigrationCreator extends BaseMigrationCreator
 {
+    /**
+     * The filesystem instance.
+     *
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
+
+    /**
+     * The custom app stubs directory.
+     *
+     * @var string
+     */
+    protected $customStubPath;
+
+    /**
+     * Create a new migration creator instance.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  string  $customStubPath
+     * @return void
+     */
+    public function __construct(Filesystem $files, $customStubPath = '')
+    {
+        parent::__construct($files, $customStubPath);
+    }
+
     /**
      * Create a new migration at the given path.
      *
