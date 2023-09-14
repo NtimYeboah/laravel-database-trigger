@@ -23,7 +23,7 @@ class MigrationCreatorTest extends TestCase
 
         $path = $creator->write('bar', 'baz', 'quz', 'quuz', 'corge');
 
-        $this->assertEquals('corge/foo_create_bar_trigger.php', "");
+        $this->assertEquals('corge/foo_create_bar_trigger.php', $path);
     }
 
     protected function getCreator()
