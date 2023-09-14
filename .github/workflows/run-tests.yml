@@ -44,10 +44,11 @@ jobs:
                 color: warning
 
             - name: Execute tests
+              id: tests
               run: vendor/bin/phpunit
 
             - name: Notify slack success
-              if: success()
+              if: steps.tests.outcome == 'success'
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
               uses: voxmedia/github-action-slack-notify-build@v1
@@ -58,7 +59,7 @@ jobs:
                 color: good
 
             - name: Notify slack fail
-              if: failure()
+              if: steps.tests.outcome == 'failure'
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
               uses: voxmedia/github-action-slack-notify-build@v1
