@@ -32,6 +32,17 @@ jobs:
               run: |
                 composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
                 
+            - name: Notify slack test starting
+              if: success()
+              id: slack
+              env:
+                SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+              uses: voxmedia/github-action-slack-notify-build@v1
+              with:
+                channel: bot-channel
+                status: STARTING
+                color: warning
+
             - name: Execute tests
               run: vendor/bin/phpunit
 
@@ -41,6 +52,7 @@ jobs:
                 SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
               uses: voxmedia/github-action-slack-notify-build@v1
               with:
+                message_id: ${{ steps.slack.outputs.message_id }}
                 channel: bot-channel
                 status: SUCCESS
                 color: good
@@ -51,6 +63,7 @@ jobs:
                 SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
               uses: voxmedia/github-action-slack-notify-build@v1
               with:
+                message_id: ${{ steps.slack.outputs.message_id }}
                 channel: bot-channel
                 status: FAILED
                 color: danger
