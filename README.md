@@ -10,7 +10,7 @@ A trigger is a named database object that is associated with a table, and that a
 
 ## Installation
 
-Laravel Database Trigger requires at least [PHP](https://php.net) 7.3. This particular version supports Laravel v8.*. Check the table below for versions support.
+Laravel Database Trigger requires at least [PHP](https://php.net) 8.0. This particular version supports Laravel v9.*. Check the table below for versions support.
 
 | Package version | Laravel version | PHP version |
 |----------|:-------------:|------:|
@@ -19,13 +19,14 @@ Laravel Database Trigger requires at least [PHP](https://php.net) 7.3. This part
 | 3.* | 6.* | >= 7.2.5 or >= 8.0 |
 | 4.* | 7.* | >= 7.2.5 or >= 8.0 |
 | 5.* | 8.* | >= 7.3 or >= 8.0 |
+| 6.* | 9.* | 8.0 - 8.3 |
 
-The package currently supports MySQL only.
+This package currently supports MySQL only.
 
 To get the latest version, simply require the package using [Composer](https://getcomposer.org):
 
 ```bash
-$ composer require ntimyeboah/laravel-database-trigger
+composer require ntimyeboah/laravel-database-trigger
 ```
 
 Once installed, if you are not using automatic package discovery, then you need to register the `NtimYeboah\LaravelDatabaseTrigger\TriggerServiceProvider` service provider in your `config/app.php`.
@@ -36,7 +37,7 @@ Create a trigger migration file using the `make:trigger` artisan command.
 The command requires the name of the trigger, name of the event object table, action timing and the event that activates the trigger.
 
 ```bash
-$ php artisan make:trigger after_users_update
+php artisan make:trigger after_users_update
 ```
 
 ### Event object table
@@ -66,7 +67,7 @@ The following trigger migration file will be generated for a trigger that uses `
 use Illuminate\Database\Migrations\Migration;
 use NtimYeboah\LaravelDatabaseTrigger\TriggerFacade as Schema;
 
-class CreateAfterUsersUpdateTrigger extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -91,9 +92,9 @@ class CreateAfterUsersUpdateTrigger extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users.after_users_update');
+        Schema::dropIfExists('after_users_update');
     }
-}
+};
 
 ```
 
@@ -132,6 +133,12 @@ Run the tests with:
 ```php
 $ composer test
 ```
+
+## Consider hiring me
+I am currently seeking new employment opportunities and would appreciate it if you'd keep me in mind for roles such as Backend Developer.
+Kindly contact me at: ntimobedyeboah@gmail.com
+This is a link to my CV: [Ntim Yeboah CV](https://docs.google.com/document/d/1jXVsN1NU5AH2XhStxjuwumGIqunoyk0cPPXZr6viaNs/edit?usp=sharing)
+
 
 ## Changelog
 
