@@ -44,6 +44,7 @@ class TriggerMakeCommand extends BaseCommand
      *
      * @param MigrationCreator $creator
      * @param Composer $composer
+     * @return void
      */
     public function __construct(MigrationCreator $creator, Composer $composer)
     {
@@ -53,6 +54,11 @@ class TriggerMakeCommand extends BaseCommand
         $this->composer = $composer;
     }
 
+    /**
+     * Write migration.
+     *
+     * @return void
+     */
     public function handle()
     {
         $name = Str::snake(trim($this->input->getArgument('name')));
@@ -65,7 +71,7 @@ class TriggerMakeCommand extends BaseCommand
         $event = $this->choice('Event manipulation', ['insert', 'update', 'delete']);
         $this->info("Event manipulation: {$event} \n");
 
-        $this->writeMigration($name, $eventObjectTable, $actionTiming, $event);
+        $this->writeMigration($name, $eventObjectTable, $actionTiming, $event); // Change to Laravel's command
 
         $this->composer->dumpAutoloads();
     }
@@ -89,7 +95,7 @@ class TriggerMakeCommand extends BaseCommand
             $this->getMigrationPath()
         ), PATHINFO_FILENAME);
 
-        $this->line("<info>Created Migration:</info> {$file}");
+        $this->line("<info>Created Migration:</info> {$file}"); // Change to Laravel's command
     }
 
     /**
