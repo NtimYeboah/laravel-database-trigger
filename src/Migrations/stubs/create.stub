@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use NtimYeboah\LaravelDatabaseTrigger\TriggerFacade as Schema;
 
-class DummyClass extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,6 @@ class DummyClass extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('DummyEventObjectTable.DummyName');
+        Schema::dropIfExists('DummyName');
     }
-}
+};
