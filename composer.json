@@ -1,10 +1,11 @@
 {
     "name": "ntimyeboah/laravel-database-trigger",
-    "description": "A package to add database trigger to laravel migrations",
+    "description": "A package to add database trigger to Laravel migrations",
     "keywords": [
         "NtimYeboah",
         "trigger",
         "database",
+        "laravel",
         "laravel-database-trigger"
     ],
     "license": "MIT",
@@ -16,8 +17,8 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "laravel/framework": "^8.75"
+        "php": "^8.0",
+        "laravel/framework": "^9.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.4.4",
@@ -45,5 +46,6 @@
                 "NtimYeboah\\LaravelDatabaseTrigger\\TriggerServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
