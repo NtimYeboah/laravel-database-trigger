@@ -2,7 +2,7 @@ Add database trigger to laravel migrations
 ==========================================
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/NtimYeboah/laravel-database-trigger.svg?style=flat-square)](https://travis-ci.org/NtimYeboah/laravel-database-trigger)
+![Build Status](https://github.com/NtimYeboah/laravel-database-trigger/actions/workflows/run-tests/badge.svg)
 
 Laravel Database Trigger provides a way to add database trigger to laravel migrations just like you would with database table. 
 A trigger is a named database object that is associated with a table, and that activates when a particular event occurs for the table. Read more about triggers [here](https://dev.mysql.com/doc/refman/8.0/en/triggers.html).
