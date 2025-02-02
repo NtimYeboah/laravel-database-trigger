@@ -63,15 +63,15 @@ class TriggerMakeCommand extends BaseCommand
     {
         $name = Str::snake(trim($this->input->getArgument('name')));
 
-        $eventObjectTable = $this->ask('Event object table name');
+        $eventObjectTable = $this->components->ask('Event object table name');
 
-        $actionTiming = $this->choice('Action timing', ['after', 'before']);
-        $this->info("Action timing: {$actionTiming}");
+        $actionTiming = $this->components->choice('Action timing', ['after', 'before']);
+        $this->components->info("Action timing: {$actionTiming}");
 
-        $event = $this->choice('Event manipulation', ['insert', 'update', 'delete']);
-        $this->info("Event manipulation: {$event} \n");
+        $event = $this->components->choice('Manipulation event', ['insert', 'update', 'delete']);
+        $this->components->info("Manipulation event: {$event}");
 
-        $this->writeMigration($name, $eventObjectTable, $actionTiming, $event); // Change to Laravel's command
+        $this->writeMigration($name, $eventObjectTable, $actionTiming, $event);
 
         $this->composer->dumpAutoloads();
     }
@@ -95,7 +95,7 @@ class TriggerMakeCommand extends BaseCommand
             $this->getMigrationPath()
         ), PATHINFO_FILENAME);
 
-        $this->line("<info>Created Migration:</info> {$file}"); // Change to Laravel's command
+        $this->components->info("Created Migration: {$file}");
     }
 
     /**

@@ -10,12 +10,12 @@ jobs:
             matrix:
                 os: [ubuntu-latest]
                 php: ['8.2']
-                laravel: ['10.x-dev']
+                laravel: ['11.0']
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
-                  - laravel: '10.x-dev'
+                  - laravel: '11.0'
 
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+        name: ${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
         steps:
             - name: Checkout code

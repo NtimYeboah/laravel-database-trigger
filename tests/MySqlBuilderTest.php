@@ -13,8 +13,7 @@ class MySqlBuilderTest extends TestCase
         m::close();
     }
 
-    /** @test */
-    public function trigger_correctly_calls_grammar()
+    public function test_trigger_correctly_calls_grammar()
     {
         $connection = m::mock('Illuminate\Database\Connection');
         $grammar = m::mock('stdClass');

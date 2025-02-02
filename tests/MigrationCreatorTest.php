@@ -12,11 +12,10 @@ class MigrationCreatorTest extends TestCase
         m::close();
     }
 
-    /** @test */
-    public function trigger_creation_migration_stores_migration_file()
+    public function test_trigger_creation_migration_stores_migration_file()
     {
         $creator = $this->getCreator();
-        $creator->expects($this->any())->method('getDatePrefix')->will($this->returnValue('foo'));
+        $creator->expects($this->any())->method('getDatePrefix')->willReturn('foo');
         $creator->getFilesystem()->shouldReceive('get')->once()->with($creator->stubPath().'/create.stub')
             ->andReturn('DummyClass DummyName DummyEventObjectTable DummyActionTiming DummyEvent');
         $creator->getFilesystem()->shouldReceive('put')->once()->with('corge/foo_create_bar_trigger.php', 'CreateBarTrigger bar baz quz quuz');
