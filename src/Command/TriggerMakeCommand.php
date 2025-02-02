@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\LaravelDatabaseTrigger\Command; 
+namespace NtimYeboah\LaravelDatabaseTrigger\Command;
 
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Support\Composer;
