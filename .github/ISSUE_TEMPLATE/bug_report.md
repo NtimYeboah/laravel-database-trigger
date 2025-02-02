@@ -7,13 +7,16 @@ assignees: NtimYeboah
 
 ---
 
+- Package Version: #.#.#
+- PHP Version:
+- Database Driver & Version:
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Run the php artisan make:trigger command
-2. Expect...
 
 
 **Expected behavior**
