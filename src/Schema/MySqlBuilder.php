@@ -66,7 +66,7 @@ class MySqlBuilder
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->grammar = $this->getDefaultGrammar();
+        $this->grammar = $this->getDefaultGrammar($this->connection);
     }
 
     /**
@@ -284,8 +284,8 @@ class MySqlBuilder
      *
      * @return \NtimYeboah\LaravelDatabaseTrigger\Schema\Grammars\MySqlGrammar
      */
-    protected function getDefaultGrammar()
+    protected function getDefaultGrammar(Connection $connection)
     {
-        return new MySqlGrammar();
+        return new MySqlGrammar($connection);
     }
 }

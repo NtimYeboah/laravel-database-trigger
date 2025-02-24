@@ -23,7 +23,7 @@ Laravel Database Trigger requires at least [PHP](https://php.net) 8.2. This part
 | 5.* | 8.* | >= 7.3 or >= 8.0 |
 | 6.* | 9.* | >=8.0 |
 | 7.* | 10.* | >=8.1 |
-| 8.* | 11.* | >=8.2 |
+| 8.* | 11.* , 12.* | >=8.2 |
 
 This package currently supports MySQL only.
 
