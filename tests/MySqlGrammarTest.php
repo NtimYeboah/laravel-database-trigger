@@ -30,7 +30,7 @@ class MySqlGrammarTest extends TestCase
             ->delete();
 
         $connection = $this->getConnection();
-        $statements = $blueprint->toSql($connection, $this->getGrammar());
+        $statements = $blueprint->toSql($connection, $this->getGrammar($connection));
 
         $actionStatement = 'create trigger after_users_delete after delete on `users` for each row begin DELETE FROM users WHERE id = 1; end';
 
@@ -43,8 +43,8 @@ class MySqlGrammarTest extends TestCase
         $blueprint = new Blueprint($trigger);
         $blueprint->dropIfExists($trigger);
 
-        $conn = $this->getConnection();
-        $statement = $blueprint->toSql($conn, $this->getGrammar());
+        $connection = $this->getConnection();
+        $statement = $blueprint->toSql($connection, $this->getGrammar($connection));
 
         $dropClause = 'drop trigger if exists before_employees_update';
 
@@ -56,8 +56,8 @@ class MySqlGrammarTest extends TestCase
         return m::mock('Illuminate\Database\Connection');
     }
 
-    private function getGrammar()
+    private function getGrammar($connectionMock)
     {
-        return new MySqlGrammar();
+        return new MySqlGrammar($connectionMock);
     }
 }
